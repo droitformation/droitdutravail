@@ -10,29 +10,25 @@ class UploadWorker implements UploadInterface {
 	*/	
 	public function upload( $file , $destination , $type = null){
 
-        try
+        $name = $file->getClientOriginalName();
+        $ext  = $file->getClientOriginalExtension();
+
+        // Get the name first because after moving, the file doesn't exist anymore
+        $new  = $file->move($destination,$name);
+        $size = $new->getSize();
+        $mime = $new->getMimeType();
+        $path = $new->getRealPath();
+
+        $image_name = basename($name,'.'.$ext);
+
+        //resize
+        if($type)
         {
-            $name = $file->getClientOriginalName();
-            $ext  = $file->getClientOriginalExtension();
-
-            // Get the name first because after moving, the file doesn't exist anymore
-            $new  = $file->move($destination,$name);
-            $size = $new->getSize();
-            $mime = $new->getMimeType();
-            $path = $new->getRealPath();
-
-            $image_name = basename($name,'.'.$ext);
-
-            //resize
-            if($type)
-            {
-                $sizes = config('size.'.$type);
-                $this->resize( $path, $image_name, $sizes['width'], $sizes['height']);
-            }
-
-            return array('name' => $name ,'ext' => $ext ,'size' => $size ,'mime' => $mime ,'path' => $path  );
+            $sizes = config('size.'.$type);
+            $this->resize( $path, $image_name, $sizes['width'], $sizes['height']);
         }
-        catch(\Exception $e){}
+
+        return array('name' => $name ,'ext' => $ext ,'size' => $size ,'mime' => $mime ,'path' => $path  );
 
 	}
 	
