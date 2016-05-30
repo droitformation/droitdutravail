@@ -1,0 +1,36 @@
+#logo,#logo a {
+    font-size: 41px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 60px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.focusedform .panel {
+    width: 100%;
+}
+
+.focusedform .verticalcenter {
+    top: 32%;
+}
+
+.panel-footer {
+    background: none;
+}
+
+.btn-demande{
+    display: block;
+    padding: 10px;
+    font-size: 17px;
+}
+
+.panel-warning p{
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+h3{
+    font-size: 20px;
+}
