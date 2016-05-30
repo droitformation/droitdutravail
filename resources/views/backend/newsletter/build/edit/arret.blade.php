@@ -29,16 +29,17 @@
                 </div>
             </td>
         </tr>
-        <tr bgcolor="ffffff"><td colspan="3" height="35" class="blocBorder"></td></tr><!-- space -->
+
+        @if($bloc->arrets_analyses->isEmpty())
+            <tr bgcolor="ffffff"><td colspan="3" height="35" class="blocBorder"></td></tr><!-- space -->
+        @endif
     </table>
     <!-- Bloc content-->
 
     @if(!$bloc->arrets_analyses->isEmpty())
         <!-- Bloc content-->
         <table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="resetTable">
-            <tr bgcolor="ffffff">
-                <td colspan="3" height="35"></td>
-            </tr><!-- space -->
+            <tr bgcolor="ffffff"><td colspan="3" height="35"></td></tr><!-- space -->
             <tr>
                 <td valign="top" width="375" class="resetMarge contentForm">
                     <?php $i = 1; ?>

@@ -86,6 +86,7 @@ Route::group(['middlewareGroups' => ['web']], function () {
         Route::get('campagne/simple/{id}', 'Backend\Newsletter\CampagneController@simple');
         Route::resource('campagne', 'Backend\Newsletter\CampagneController');
 
+        Route::delete('subscriber', 'Backend\Newsletter\SubscriberController@destroy');
         Route::resource('subscriber', 'Backend\Newsletter\SubscriberController');
         Route::get('subscribers', ['uses' => 'Backend\Newsletter\SubscriberController@subscribers']);
 

@@ -24,7 +24,6 @@
             <tr>
                 <td valign="top" width="375" class="resetMarge contentForm">
                     <div>
-                        <?php setlocale(LC_ALL, 'fr_FR.UTF-8');?>
                         <h3 style="text-align: left;font-family: sans-serif;">{{ $arret->reference }} du {{ $arret->pub_date->formatLocalized('%d %B %Y') }}</h3>
                         <p class="abstract">{!! $arret->abstract !!}</p>
                         <div>{!! $arret->pub_text !!}</div>
@@ -41,7 +40,21 @@
                     </div>
                 </td>
             </tr>
-            <tr bgcolor="ffffff"><td colspan="3" height="35" class="blocBorder"></td></tr><!-- space -->
+
+            @if($arret->arrets_analyses->isEmpty())
+                <tr bgcolor="ffffff"><td colspan="3" height="35" class="blocBorder"></td></tr><!-- space -->
+            @endif
+
+            <!-- Analyses if any -->
+            @if(isset($arret->arrets_analyses) && !$arret->arrets_analyses->isEmpty())
+                <tr align="center" class="resetMarge">
+                    <td class="resetMarge" colspan="3">
+                        @include('backend.newsletter.build.edit.analyse',['arret' => $arret])
+                    </td>
+                </tr>
+                <tr bgcolor="ffffff"><td height="35" colspan="3" class="blocBorder"></td></tr><!-- space -->
+            @endif
+
         </table>
         <!-- Bloc content-->
 

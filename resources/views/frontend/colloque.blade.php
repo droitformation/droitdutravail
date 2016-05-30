@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <h1 class="title uppercase">Colloque</h1>
+                <h1 class="title uppercase">Colloques</h1>
             </div>
             <div class="col-md-4 text-right">
                 @include('partials.soutien')

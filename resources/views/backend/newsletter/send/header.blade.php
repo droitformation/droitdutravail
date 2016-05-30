@@ -1,17 +1,17 @@
 <tr>
     <td align="center">
         <!-- Title -->
-        <table bgcolor="{{ $infos->newsletter->color }}" width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="resetTable headerInfos">
-            <tr bgcolor="{{ $infos->newsletter->color }}"><td colspan="4" height="10"></td></tr><!-- space -->
-            <tr bgcolor="{{ $infos->newsletter->color }}">
+        <table bgcolor="#5A101F" width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="resetTable headerInfos">
+            <tr bgcolor="#5A101F"><td colspan="4" height="10"></td></tr><!-- space -->
+            <tr bgcolor="#5A101F">
                 <td width="430">
-                    <table width="430" bgcolor="{{ $infos->newsletter->color }}" border="0" cellpadding="0" cellspacing="0" align="center" class="resetTable">
-                        <tr bgcolor="{{ $infos->newsletter->color }}">
+                    <table width="430" bgcolor="#5A101F" border="0" cellpadding="0" cellspacing="0" align="center" class="resetTable">
+                        <tr bgcolor="#5A101F">
                             <td width="20"></td>
                             <td colspan="2" align="left"><h1 class="header"><span style="color: #fff;font-size: 18px;">{{ $infos->sujet  }}</span></h1></td>
                             <td width="20"></td>
                         </tr>
-                        <tr bgcolor="{{ $infos->newsletter->color }}">
+                        <tr bgcolor="#5A101F">
                             <td width="20"></td>
                             <td align="left"><h2 class="header headerSmall"><span style="color: #fff;font-size: 15px;">Editée par {{ $infos->auteurs }}</span></h2></td>
                             <td width="20"></td>
@@ -29,7 +29,7 @@
                     @endif
                 </td>
             </tr><!-- space -->
-            <tr bgcolor="{{ $infos->newsletter->color }}"><td colspan="4" height="10"></td></tr><!-- space -->
+            <tr bgcolor="#5A101F"><td colspan="4" height="10"></td></tr><!-- space -->
         </table>
         <!-- End title -->
     </td>

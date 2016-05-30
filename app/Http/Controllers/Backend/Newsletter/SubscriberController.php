@@ -169,7 +169,7 @@ class SubscriberController extends Controller
      * @param  int  $email
      * @return Response
      */
-    public function destroy($id,Request $request)
+    public function destroy(Request $request)
     {
         // Validate the email
         $this->validate($request, array('email' => 'required'));
