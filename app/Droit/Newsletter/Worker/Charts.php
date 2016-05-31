@@ -104,6 +104,8 @@ class Charts{
     }
     public function compileStats($stats){
 
+        $data = [];
+        
         if(!empty($stats))
         {
             // Datas

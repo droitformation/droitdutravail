@@ -23,6 +23,8 @@ class StatsController extends Controller
         $this->campagne     = $campagne;
         $this->statsworker  = $statsworker;
         $this->charts       = new \App\Droit\Newsletter\Worker\Charts();
+
+        setlocale(LC_ALL, 'fr_FR');
     }
 
     /**
@@ -34,18 +36,24 @@ class StatsController extends Controller
      */
     public function show($id)
     {
+        $statistiques = [];
+        $allclicks = [];
         // Stats open, bounce etc.
         $campagne      = $this->campagne->find($id);
 
         $campagneStats = $this->worker->statsCampagne($campagne->api_campagne_id);
-        $campagneStats = $this->statsworker->filterResponseStatistics($campagneStats);
-        $statistiques  = $this->charts->compileStats($campagneStats);
 
-        // Clicks
-        $clickStats = $this->worker->clickStatistics($campagneStats->CampaignID);
+        if($campagneStats)
+        {
+            $campagneStats = $this->statsworker->filterResponseStatistics($campagneStats);
+            $statistiques  = $this->charts->compileStats($campagneStats);
 
-        $allclicks[] = $this->sumStatsClicksLinks($campagneStats->CampaignID);
-        $allclicks   = $this->statsworker->statsClicksLinks($allclicks);
+            // Clicks
+            $clickStats = $this->worker->clickStatistics($campagneStats->CampaignID);
+
+            $allclicks[] = $this->sumStatsClicksLinks($campagneStats->CampaignID);
+            $allclicks   = $this->statsworker->statsClicksLinks($allclicks);
+        }
 
         return view('backend.newsletter.stats.show')->with(
             [

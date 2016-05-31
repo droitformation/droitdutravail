@@ -21,47 +21,49 @@
                 <div class="panel-body">
 
                     <h3>Campagne : {{ $campagne->sujet }}</h3>
-                    <?php setlocale(LC_ALL, 'fr_FR'); ?>
                     <p><strong>Envoyé le {{ $campagne->updated_at->formatLocalized('%d %B %Y') }}</strong></p>
 
-                    <div class="row margeUpDown"><!-- start row -->
-                        <div class="col-md-2">
-                            <a href="#" class="info-tiles tiles-midnightblue">
-                                <div class="tiles-heading"><div class="pull-left">Envoyés</div></div>
-                                <div class="tiles-body">
-                                    <div class="pull-left"><i class="fa fa-location-arrow"></i></div>
-                                    <div class="pull-right"><span>{{ $statistiques['total'] }}</span></div>
+                    @if(!empty($statistiques))
+
+                            <div class="row margeUpDown"><!-- start row -->
+                                <div class="col-md-2">
+                                    <a href="#" class="info-tiles tiles-midnightblue">
+                                        <div class="tiles-heading"><div class="pull-left">Envoyés</div></div>
+                                        <div class="tiles-body">
+                                            <div class="pull-left"><i class="fa fa-location-arrow"></i></div>
+                                            <div class="pull-right"><span>{{ $statistiques['total'] }}</span></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="info-tiles tiles-success">
-                                <div class="tiles-heading"><div class="pull-left">Ouverts</div></div>
-                                <div class="tiles-body">
-                                    <div class="pull-left"><i class="fa fa-check"></i></div>
-                                    <div class="pull-right"><span>{{ $statistiques['opened'] }}%</span></div>
+                                <div class="col-md-2">
+                                    <a href="#" class="info-tiles tiles-success">
+                                        <div class="tiles-heading"><div class="pull-left">Ouverts</div></div>
+                                        <div class="tiles-body">
+                                            <div class="pull-left"><i class="fa fa-check"></i></div>
+                                            <div class="pull-right"><span>{{ $statistiques['opened'] }}%</span></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="info-tiles tiles-info">
-                                <div class="tiles-heading"><div class="pull-left">Cliqués</div></div>
-                                <div class="tiles-body">
-                                    <div class="pull-left"><i class="fa fa-link"></i></div>
-                                    <div class="pull-right"><span>{{ $statistiques['clicked'] }}%</span></div>
+                                <div class="col-md-2">
+                                    <a href="#" class="info-tiles tiles-info">
+                                        <div class="tiles-heading"><div class="pull-left">Cliqués</div></div>
+                                        <div class="tiles-body">
+                                            <div class="pull-left"><i class="fa fa-link"></i></div>
+                                            <div class="pull-right"><span>{{ $statistiques['clicked'] }}%</span></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="info-tiles tiles-orange">
-                                <div class="tiles-heading"><div class="pull-left">Refusés</div></div>
-                                <div class="tiles-body">
-                                    <div class="pull-left"><i class="fa fa-minus-circle"></i></div>
-                                    <div class="pull-right"><span>{{ $statistiques['bounced'] }}%</span></div>
+                                <div class="col-md-2">
+                                    <a href="#" class="info-tiles tiles-orange">
+                                        <div class="tiles-heading"><div class="pull-left">Refusés</div></div>
+                                        <div class="tiles-body">
+                                            <div class="pull-left"><i class="fa fa-minus-circle"></i></div>
+                                            <div class="pull-right"><span>{{ $statistiques['bounced'] }}%</span></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div><!-- end row -->
+                            </div><!-- end row -->
+                    @endif
 
                     <h3>Statistiques des liens cliqués</h3>
 
