@@ -40,25 +40,9 @@ class ArretEloquent implements ArretInterface{
         return $this->arret->with( array('arrets_categories','arrets_analyses'))->orderBy('pub_date', 'DESC')->paginate($nbr);
     }
 
-    public function getLatest($exclude = []){
-
-        if(!empty($exclude))
-        {
-            $arrets = $this->arret
-                ->whereNotIn('id', $exclude)
-                ->with( array('arrets_analyses'))->orderBy('id', 'ASC')->get();
-
-            $new = $arrets->filter(function($item)
-            {
-                if (!$item->arrets_analyses->isEmpty()) {
-                    return true;
-                }
-            });
-
-            return $new->take(5);
-        }
-
-        return false;
+    public function getLatest($exclude = [])
+    {
+        return $this->arret->whereNotIn('id', $exclude)->has('arrets_analyses')->with(array('arrets_analyses'))->orderBy('id', 'ASC')->get()->take(5);
     }
 
 	public function find($id){
