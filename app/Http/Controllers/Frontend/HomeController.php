@@ -59,7 +59,7 @@ class HomeController extends Controller
 
         $include = $this->jurisprudence->showArrets();
         $latest  = $this->arret->getLatest($include);
-
+        
         view()->share('pages', $pages);
         view()->share('sidebar', $sidebar);
         view()->share('latest', $latest);
