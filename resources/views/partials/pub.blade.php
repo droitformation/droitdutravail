@@ -12,7 +12,7 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{ $ad->titre }}</h4>
-                        {{ $ad->contenu or '' }}
+                        {!! $ad->contenu or '' !!}
                         <a class="button small grey" target="_blank" href="{{ $ad->url }}">En savoir plus</a>
                     </div>
                 </div>
