@@ -89,9 +89,16 @@ class Charts{
 
             // Calculations
             // We need bounce, non open, open+clic, only open
-            $nonopen  = $sent - ($open + $bounce);
-            $openclic = $clic;
-            $onlyopen = $open - $clic;
+            $openclic = 0;
+            $onlyopen = 0;
+            $nonopen  = 0;
+
+            if($sent > 0){
+                // Calculations
+                $nonopen  = ($sent - ($open + $bounce))/$sent;
+                $openclic = ($open-$clic-$bounce)/$sent;
+                $onlyopen = $open/$sent;
+            }
 
             $data[] = array('label' => 'Ouverts et Cliqués', 'data' => $openclic);
             $data[] = array('label' => 'Ouverts',  'data' => $onlyopen);
@@ -105,7 +112,7 @@ class Charts{
     public function compileStats($stats){
 
         $data = [];
-        
+
         if(!empty($stats))
         {
             // Datas

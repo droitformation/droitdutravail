@@ -35,13 +35,12 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label>Sélectionner l'arrêt</label>
-                    <select class="form-control" ng-change="select.changed()" ng-model="selected" ng-options="arret.reference for arret in select.arrets track by arret.id">
+                    <select name="arret_id" class="form-control" ng-change="select.changed()" ng-model="selected" ng-options="arret.reference for arret in select.arrets track by arret.id">
                         <option value="">Choisir</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <div class="btn-group">
-                        <input type="hidden" value="{[{ select.arret.id }]}" name="arret_id">
                         <input type="hidden" value="<?php echo $bloc->id; ?>" name="type_id">
                         <input type="hidden" value="<?php echo $infos->id; ?>" name="campagne">
                         <button type="submit" class="btn btn-sm btn-success">Envoyer</button>
