@@ -345,7 +345,7 @@ class MailjetWorker implements MailjetInterface{
         # Call
         $response = $this->mailjet->campaignstatistics($params);
 
-        if ($this->mailjet->getResponseCode() == 201)
+        if ($this->mailjet->getResponseCode() == 201 || $this->mailjet->getResponseCode() == 200)
             return $response;
         else
             return null;

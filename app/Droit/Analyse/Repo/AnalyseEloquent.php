@@ -42,6 +42,7 @@ class AnalyseEloquent implements AnalyseInterface{
             'file'       => $data['file'],
             'categories' => (isset($data['categories']) ? count($data['categories']) : 0),
             'arrets'     => (isset($data['arrets']) ? count($data['arrets']) : 0),
+            'title'      => (isset($data['title']) ? count($data['title']) : null),
 			'created_at' => date('Y-m-d G:i:s'),
 			'updated_at' => date('Y-m-d G:i:s')
 		));
@@ -109,7 +110,12 @@ class AnalyseEloquent implements AnalyseInterface{
             $analyse->analyse_authors()->sync($data['author_id']);
         }
 
-		$analyse->save();
+        if(isset($data['title']))
+        {
+            $analyse->title = !empty($data['title']) ? $data['title'] : null;
+        }
+
+        $analyse->save();
 		
 		return $analyse;
 	}
