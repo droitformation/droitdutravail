@@ -32,7 +32,7 @@
                                 <tr>
                                     <td><a class="btn btn-sky btn-sm" href="{{ url('admin/author/'.$author->id) }}">&Eacute;diter</a></td>
                                     <td><strong>{{ $author->name }}</strong></td>
-                                    <td>{{ $author->occupation }}</td>
+                                    <td>{!! $author->occupation !!}</td>
                                     <td class="text-right">
                                         {!! Form::open(array('route' => array('admin.author.destroy', $author->id), 'method' => 'delete')) !!}
                                         <button data-action="{{ $author->name }}" data-what="Supprimer" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
