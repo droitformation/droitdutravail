@@ -9,6 +9,7 @@
     <meta name="author" content="Cindy Leschaud | @DesignPond">
     <meta name="_token" content="<?php echo csrf_token(); ?>">
 
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/styles.css?=121');?>">
 

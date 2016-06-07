@@ -155,3 +155,10 @@ select.form-control + .chosen-container .chosen-results li, select.form-control 
 .parent_3{
     background: #c47a0f;
 }
+
+.btn-sm, .btn-group-sm > .btn {
+    border-radius: 1px;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 5px 10px;
+}

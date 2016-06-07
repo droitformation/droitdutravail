@@ -1399,7 +1399,7 @@ th {
 .table > tfoot > tr > td {
   padding: 10px;
   line-height: 1.428571429;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #e6e7e8;
 }
 .table > thead > tr > th {
@@ -9160,17 +9160,17 @@ body.show-rightbar #chatarea .chatmsg.sent:after {
   position: relative;
 }
 #sidebar a:hover {
-  background-color: #d2d3d6;
-  color: #3f444c;
-  box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.1);
+  background: #595f69 none repeat scroll 0 0;
+  box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1) inset;
+  color: #ffffff;
 }
 #sidebar a:hover i {
   color: #3f444c;
 }
 #sidebar > li.active > a {
-  background-color: #b8b8b9;
-  color: #fff;
-  box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.1);
+  background: #595f69 none repeat scroll 0 0;
+  box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1) inset;
+  color: #ffffff;
 }
 #sidebar > li.active > a:after {
   width: 0px;
