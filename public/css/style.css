@@ -2209,6 +2209,7 @@ ul.item-nav li.all a {
 
 .form, .contact-success {
 	overflow: hidden;
+    margin-bottom:40px;
 }
 .contact-success {
 	padding: 20px;
