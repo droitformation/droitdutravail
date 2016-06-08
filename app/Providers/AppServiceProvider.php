@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', 'App\Http\ViewComposers\CategorieComposer');
-        view()->composer('frontend.*', 'App\Http\ViewComposers\NewsletterComposer');
+        view()->composer(['frontend.*','partials.navigation'], 'App\Http\ViewComposers\NewsletterComposer');
+        
     }
 
     /**
