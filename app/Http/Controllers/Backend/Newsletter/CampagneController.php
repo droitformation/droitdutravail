@@ -182,6 +182,7 @@ class CampagneController extends Controller
 
         // Send the email
         $this->mailjet->sendTest($request->input('email'),$html,$sujet);
+        
 
         // If we want to send via ajax just add a send_type "ajax
         $ajax = $request->input('send_type', 'normal');
