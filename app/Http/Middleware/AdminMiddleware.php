@@ -21,7 +21,7 @@ class AdminMiddleware {
 
         if(!in_array(1,$roles))
         {
-            return redirect()->to('/');
+            return redirect('/');
         }
 
 		return $next($request);
