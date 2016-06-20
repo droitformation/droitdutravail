@@ -34,7 +34,8 @@
                 <tr>
                     <td valign="top" width="375" class="resetMarge contentForm">
                         <div>
-                            <h3 style="text-align: left;">{{ $arret->reference }} du {{ $arret->pub_date->formatLocalized('%d %B %Y') }}</h3>
+                            <?php $title = ($arret->dumois ? 'Arrêt du mois : ' : ''); ?>
+                            <h3 style="text-align: left;">{{ $title }}{{ $arret->reference }} du {{ $arret->pub_date->formatLocalized('%d %B %Y') }}</h3>
                             <p class="abstract">{!! $arret->abstract !!}</p>
                             <div>{!! $arret->pub_text !!}</div>
                             <p><a href="{{ asset('files/arrets/'.$arret->file) }}">Télécharger en pdf</a></p>
