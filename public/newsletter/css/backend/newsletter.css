@@ -423,8 +423,3 @@ div#fieldChooser,div#fieldChooser2 {
 .errorUpload{
     text-align: center !important;
 }
-
-.ui-state-highlight{
-    height:40px;
-    display: block;
-}
