@@ -6,7 +6,6 @@
             <td style="margin: 0;padding: 0;page-break-before: always;"  valign="top">
                 @if(!empty($parent))
                     <?php $desired_parent = $parents->filter(function($item) use ($parent) { return $item->id == $parent; })->first(); ?>
-
                     @if($desired_parent->image)
                         <a target="_blank" href="{{ url('jurisprudence') }}#{{ $bloc->reference }}">
                             <img width="130" border="0" alt="{{ $desired_parent->title }}" src="{{ asset('newsletter/pictos/'.$desired_parent->image) }}">
@@ -20,9 +19,11 @@
         <tr align="center" style="margin: 0;padding: 0;">
             <td style="margin: 0;padding: 0;page-break-before: always;" valign="top">
                 @foreach($categories as $categorie)
-                   <a target="_blank" href="{{ url('jurisprudence') }}#{{ $bloc->reference }}">
-                        <img width="130" border="0" alt="{{ $categorie->title }}" src="{{ asset('newsletter/pictos/'.$categorie->image) }}">
-                   </a>
+                    @if($bloc->groupe_id == 0 || (isset($bloc) && isset($bloc->groupe) && $bloc->groupe_id > 0 && $categorie->id != $bloc->groupe->categorie_id))
+                        <a target="_blank" href="{{ url('jurisprudence') }}">
+                            <img width="130" border="0" alt="{{ $categorie->title }}" src="{{ asset('newsletter/pictos/'.$categorie->image) }}">
+                        </a>
+                    @endif
                 @endforeach
             </td>
         </tr>

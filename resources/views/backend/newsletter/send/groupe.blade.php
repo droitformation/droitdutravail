@@ -36,7 +36,7 @@
                     <!-- Categories -->
                     <div class="resetMarge">
                         @if(!$arret->arrets_categories->isEmpty() )
-                            @include('backend.newsletter.partials.categories',['categories' => $arret->arrets_categories])
+                            @include('backend.newsletter.partials.categories',['categories' => $arret->arrets_categories, 'arret' => $arret])
                         @endif
                     </div>
                 </td>
