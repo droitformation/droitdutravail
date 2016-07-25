@@ -7,7 +7,7 @@ class MailjetWorker implements MailjetInterface{
 
     protected $mailjet;
     protected $sender = 'info@droitdutravail.ch';
-    protected $list   = '1562017'; // Testing list if we want another just passe it via the constructor
+    protected $list   = '1'; // Testing list if we want another just passe it via the constructor
 
     public function __construct(Mailjet $mailjet)
     {
