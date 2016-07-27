@@ -27,8 +27,8 @@
                 </div><!--END POST-->
             </div>
             <div class="col-md-3 listCat">
-                @if(!$arret->arrets_categories->isEmpty() )
-                    <?php $sorted = $arret->arrets_categories->sortBy('parent_id')->groupBy('parent_id'); ?>
+                @if(!$arret->categories->isEmpty() )
+                    <?php $sorted = $arret->categories->sortBy('parent_id')->groupBy('parent_id'); ?>
                     @foreach($sorted as $parent => $categories)
                         @if(!empty($parent))
                             <?php $desired_parent = $parents->filter(function($item) use ($parent) { return $item->id == $parent; })->first(); ?>

@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Droit\Arret\Repo\ArretInterface;
-use App\Droit\Arret\Worker\JurisprudenceWorker;
+use App\Droit\Analyse\Repo\AnalyseInterface;
 use App\Droit\Categorie\Repo\CategorieInterface;
 
 class JurisprudenceController extends Controller
 {
     protected $arret;
+    protected $analyse;
+    protected $newsworker;
     protected $categorie;
-    protected $jurisprudence;
 
-    public function __construct(ArretInterface $arret, CategorieInterface $categorie, JurisprudenceWorker $jurisprudence)
+    public function __construct(ArretInterface $arret, AnalyseInterface $analyse, CategorieInterface $categorie)
     {
-        $this->arret         = $arret;
-        $this->categorie     = $categorie;
-        $this->jurisprudence = $jurisprudence;
+        $this->arret      = $arret;
+        $this->analyse    = $analyse;
+        $this->categorie  = $categorie;
+        
+        $this->newsworker = \App::make('newsworker');
     }
 
     /**
@@ -29,13 +32,13 @@ class JurisprudenceController extends Controller
      */
     public function index()
     {
-        $arrets     = $this->jurisprudence->preparedArrets();
-        $analyses   = $this->jurisprudence->preparedAnalyses();
-        $annees     = $this->jurisprudence->preparedAnnees();
+        $years      = $this->arret->annees();
+        $exclude    = $this->newsworker->arretsToHide([1]);
+        $arrets     = $this->arret->getAllActives($exclude);
+        $analyses   = $this->analyse->getAll($exclude);
+        $categories = $this->categorie->getAll();
 
-        $categories =  $this->categorie->getAll();
-
-        return view('frontend.jurisprudence')->with(array('arrets' => $arrets, 'analyses' => $analyses, 'annees' => $annees, 'categories' => $categories ));
+        return view('frontend.jurisprudence')->with(['arrets' => $arrets, 'analyses' => $analyses, 'annees' => $years, 'categories' => $categories]);
     }
 
 }

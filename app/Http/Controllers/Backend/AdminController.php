@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Droit\Arret\Repo\ArretInterface;
 use App\Droit\Content\Repo\ContentInterface;
-use App\Droit\Newsletter\Repo\NewsletterUserInterface;
+use designpond\newsletter\Newsletter\Repo\NewsletterUserInterface;
 
 class AdminController extends Controller {
 

@@ -1,19 +1,46 @@
 $(function() {
 
-    // Match page height with Sidebar Height
-    function checkpageheightAgain() {
-        var sh = $("#page-leftbar").height();
-        var ch = $("#wrap").height();
+    var url = location.protocol + "//" + location.host+"/";
 
-        if (sh > ch){
-            $("#page-content").css("min-height",ch+"px");
-        }
-        else{
-            $("#page-content").css("min-height",sh+"px");
-        }
-    }
+    $('.colorpicker').colorPicker();
 
-    $('body').on('click','.deleteContentBloc',function(event){
+    var $selects = $('.chooseCategorie');
+
+    var site_id = $('#main').data('site');
+    site_id = !site_id ? null : site_id;
+
+    $selects.each(function (index, value) {
+
+        var self = $(this);
+
+        jQuery.ajax({
+            dataType: 'json',
+            success: function(data)
+            {
+                var items = [];
+                // Loop over ajax data response
+                jQuery.each(data, function(key, val) {
+                    items.push('<option value="' + val.id + '">' + val.title + '</option>');
+                });
+                // Join all html, append to select and show the select
+                var all = items.join('');
+
+                self.append(all);
+            },
+            url: window.__env.ajaxUrl + 'categories/' + site_id
+        });
+
+    });
+
+    //datePickerNewsletter
+
+    $('#datePickerNewsletter').datetimepicker({
+        locale: 'fr-ch',
+        format:  'YYYY-MM-DD HH:mm',
+        minDate : moment().format()
+    });
+
+    $('body').on('click','.deleteActionNewsletter',function(event){
 
         var $this  = $(this);
         var action = $this.data('action');
@@ -24,22 +51,33 @@ $(function() {
         if (answer)
         {
             $.ajax({
-                url     : 'admin/campagne/remove',
+                url     : url + 'build/content/' + id,
                 data    : { id: id , _token : _token},
-                type    : "POST",
+                type    : "DELETE",
                 success : function(data) {
                     if(data == 'ok')
                     {
-                        console.log('ok remove');
                         $('#bloc_rang_'+id).remove();
-                        checkpageheightAgain();
                     }
                 }
             });
         }
-
         return false;
+    });
 
+    $('body').on('click','.deleteNewsAction',function(event){
+
+        var $this  = $(this);
+        var action = $this.data('action');
+        var what   = $this.data('what');
+
+        var what = (0 === what.length ? 'supprimer' : what);
+        var answer = confirm('Voulez-vous vraiment ' + what + ' : '+ action +' ?');
+
+        if (answer){
+            return true;
+        }
+        return false;
     });
 
     /**
@@ -52,15 +90,9 @@ $(function() {
 
         $('.create_bloc').hide();
         $('.edit_content_form').hide();
-        $this.hide();
 
         $('#edit_'+id).show();
 
-        // height
-        //var h = $('#edit_'+id).height();
-        //$('#bloc_rang_'+ id).css("height",h);
-
-        $( "#sortable" ).sortable( "disable" );
         $( "#sortGroupe" ).sortable( "enable" );
         $( "#sortGroupe .groupe_rang").css({ "border":"1px solid #bfe4ad"});
 
@@ -69,21 +101,19 @@ $(function() {
     $('body').on('click','.cancelEdit',function(event){
 
         $('.edit_content_form').hide();
-        $( "#sortable" ).sortable( "enable" );
         $( "#sortGroupe" ).sortable( "disable" );
         $('.bloc_rang').height('auto');
     });
 
     $('body').on('click','.cancelCreate',function(event){
         $('.create_bloc').hide();
-        $( "#sortable" ).sortable( "enable" );
     });
 
     $('body').on('click','.blocEdit',function(event){
         var $this  = $(this);
         var id     = $this.attr('rel');
         var w = $( document ).width();
-        w = w - 890;
+        w = w - 600 - w/4;
         var h = $( document ).height();
 
         $('.create_bloc').hide();
@@ -95,13 +125,11 @@ $(function() {
         setTimeout(function() {
             // height
             var h = $('#create_'+id + ' .create_content_form').height();
-            console.log(h);
             $('#create_'+id).css("height",h-100);
 
         }, 100);
 
         $('#create_'+id).show();
-        $( "#sortable" ).sortable( "disable" );
     });
 
 });

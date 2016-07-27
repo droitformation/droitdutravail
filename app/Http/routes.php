@@ -25,6 +25,7 @@ Route::group(['middlewareGroups' => ['web']], function () {
     */
 
     Route::get('newsletter', 'Frontend\NewsletterController@index');
+    Route::get('archive', 'Frontend\NewsletterController@archive');
     Route::resource('newsletter', 'Frontend\NewsletterController');
     Route::get('newsletter/campagne/{id}', 'Frontend\NewsletterController@campagne');
 
@@ -64,7 +65,7 @@ Route::group(['middlewareGroups' => ['web']], function () {
        | Backend subscriptions, newsletters and campagnes Routes
        |--------------------------------------------------------------------------
        */
-
+        /*
         Route::post('sorting', 'Backend\Newsletter\CampagneController@sorting');
         Route::post('sortingGroup', 'Backend\Newsletter\CampagneController@sortingGroup');
 
@@ -72,8 +73,13 @@ Route::group(['middlewareGroups' => ['web']], function () {
         Route::get('ajax/arrets',        'Backend\ArretController@arrets');
         Route::get('ajax/analyses/{id}', 'Backend\AnalyseController@simple');
         Route::get('ajax/categories',    'Backend\CategorieController@categories');
-        Route::post('ajax/categorie/arrets', 'Backend\CategorieController@arrets');
+        Route::post('ajax/categorie/arrets', 'Backend\CategorieController@arrets');*/
 
+        Route::get('ajax/arret/{id}', 'Backend\ArretController@simple'); // build.js
+        Route::get('ajax/arrets/{id?}', 'Backend\ArretController@arrets'); // build.js
+        Route::get('ajax/categories/{id?}', 'Backend\CategorieController@categories'); // utils.js
+
+   /*     
         Route::resource('newsletter', 'Backend\Newsletter\NewsletterController');
 
         Route::post('clipboard/copy', 'Backend\Newsletter\ClipboardController@copy');
@@ -95,7 +101,7 @@ Route::group(['middlewareGroups' => ['web']], function () {
         Route::get('subscribers', ['uses' => 'Backend\Newsletter\SubscriberController@subscribers']);
 
         Route::resource('import', 'Backend\Newsletter\ImportController');
-        Route::resource('statistics', 'Backend\Newsletter\StatsController');
+        Route::resource('statistics', 'Backend\Newsletter\StatsController');*/
     });
 
     /*

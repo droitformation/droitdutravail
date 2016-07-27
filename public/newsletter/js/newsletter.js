@@ -1,5 +1,10 @@
+jQuery(function($){
 
-$(function() {
+    var url = location.protocol + "//" + location.host+"/";
+
+    if(window){
+        Object.assign(__env, window.__env);
+    }
 
     $('.sendEmailNewsletter').click(function(){
 
@@ -12,12 +17,12 @@ $(function() {
             }
             else
             {
-                message.find('.alert').addClass('alert-warning');
-                message.find('.alert p').html('Email de test en cours d\'envoi &nbsp;<i class="fa fa-spinner fa-spin"></i>');
                 message.show();
+                message.find('.alert').addClass('alert-warning');
+                message.find('.alert p').html('Email de test en cours d\'envoi &nbsp;<i class="fa fa-spinner fa-spin"></i>').show();
 
                 $.ajax({
-                    url     : 'admin/campagne/test',
+                    url     : url + 'build/send/test',
                     data    : { id: campagneId , email: result, send_type : 'ajax', _token : $("meta[name='_token']").attr('content')},
                     type    : "POST",
                     success : function(data) {
@@ -32,48 +37,12 @@ $(function() {
                                     $(this).remove();
                                 });
                             }, 3500);
-
                         }
                     }
                 });
-
             }
         });
     });
-
-    $('#bootbox-demo-3').click(function(){
-        var campagneId = $(this).data('campagne');
-        var sujet      = '';
-
-        /**
-         * Get campagne infos
-         */
-        $.get('admin/campagne/simple/' + campagneId , function( campagne ) {
-            sujet = campagne.sujet;
-            console.log(sujet);
-        }) .always(function() {
-
-            /**
-             * Modal
-             */
-            bootbox.dialog({
-                message: "Etes-vous sûr de vouloir envoyer la campagne : <strong>" + sujet + "</strong>?",
-                title: "Envoyer la campagne",
-                buttons: {
-                    success: {
-                        label: "Oui!",
-                        className: "btn-success",
-                        callback: function() {
-                            $("#sendCampagneForm").submit();
-                        }
-                    },
-                    main: {
-                        label: "Annuler",
-                        className: "btn-default"
-                    }
-                }
-            });
-        });
-    });
+    
 
 });

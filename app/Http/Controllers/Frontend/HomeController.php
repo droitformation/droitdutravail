@@ -8,8 +8,8 @@ use App\Http\Requests\SendMessageRequest;
 use App\Http\Controllers\Controller;
 
 use App\Droit\Author\Repo\AuthorInterface;
-use App\Droit\Newsletter\Repo\NewsletterInterface;
-use App\Droit\Newsletter\Repo\NewsletterCampagneInterface;
+use designpond\newsletter\Newsletter\Repo\NewsletterInterface;
+use designpond\newsletter\Newsletter\Repo\NewsletterCampagneInterface;
 use App\Droit\Content\Repo\ContentInterface;
 use App\Droit\Page\Repo\PageInterface;
 use App\Droit\Arret\Worker\JurisprudenceWorker;
@@ -27,6 +27,7 @@ class HomeController extends Controller
     protected $jurisprudence;
     protected $arret;
     protected $worker;
+    protected $newsworker;
 
     public function __construct(
         AuthorInterface $author,
@@ -57,8 +58,10 @@ class HomeController extends Controller
         $sidebar = $sidebar->groupBy('type');
         $pages   = $this->page->getAll();
 
-        $include = $this->jurisprudence->showArrets();
-        $latest  = $this->arret->getLatest($include);
+        $this->newsworker = \App::make('newsworker');
+
+        $exclude = $this->newsworker->arretsToHide([1]);
+        $latest  = $this->arret->getLatest($exclude);
 
         view()->share('pages', $pages);
         view()->share('sidebar', $sidebar);

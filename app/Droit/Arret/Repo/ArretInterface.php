@@ -7,6 +7,7 @@ interface ArretInterface {
     public function getPaginate($nbr);
     public function getLatest($include = []);
 	public function find($data);
+    public function annees();
     public function findyByImage($file);
 	public function create(array $data);
 	public function update(array $data);

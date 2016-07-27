@@ -19,10 +19,11 @@
 
     <div class="row">
         <div id="inner-content" class="col-md-8 col-xs-12">
-
-            @if(!empty($content))
-                @foreach($content as $bloc)
-                    {!! view('frontend/content/'.$bloc->type->partial)->with( ['bloc' => $bloc ,'categories' => $categories, 'imgcategories' => $imgcategories ])->__toString()  !!}
+            @if(!$campagne->content->isEmpty())
+                @foreach($campagne->content as $bloc)
+                    <div class="bloc-newsletter">
+                        {!! view('newsletter::Frontend.content.'.$bloc->type->partial)->with(['bloc' => $bloc ])->__toString() !!}
+                    </div>
                 @endforeach
             @endif
         </div>

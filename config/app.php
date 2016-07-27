@@ -161,7 +161,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ContentServiceProvider::class,
-        App\Providers\NewsletterServiceProvider::class,
+        designpond\newsletter\newsletterServiceProvider::class,
+        //App\Providers\NewsletterServiceProvider::class,
 
     ],
 
@@ -213,6 +214,7 @@ return [
         'Html'  => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Campagne' => designpond\newsletter\Facade\Campagne::class
     ],
 
 ];

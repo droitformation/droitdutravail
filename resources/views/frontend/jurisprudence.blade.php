@@ -20,14 +20,15 @@
             <div id="filtering">
                 <div class="arrets">
 
-                    @include('frontend.content.analyse')
+                    @if(!empty($analyses))
+                        <h4 class="title-section-top"><i class="fa fa-file"></i> &nbsp;&nbsp;Analyses</h4>
+                        @include('frontend.content.analyse')
+                    @endif
 
                     @if(!empty($arrets))
-
                         <h4 class="title-section-top"><i class="fa fa-university"></i> &nbsp;&nbsp;Jurisprudence</h4>
-
                         @foreach($arrets as $post)
-                            @include('frontend.content.post')
+                            @include('frontend.content.post', ['arret' => $post])
                         @endforeach
                     @endif
 

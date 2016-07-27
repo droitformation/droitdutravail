@@ -197,9 +197,9 @@ margin: 0;
 /*--------------------------------------------------
 			POST
 ---------------------------------------------------*/
-.post {
-	margin: 0 0 30px 0;
-	padding: 0 0 30px 0;
+.post, .bloc-content {
+	margin: 0 0 20px 0;
+	padding: 0 0 20px 0;
 	overflow: hidden;
 }
 
@@ -569,10 +569,25 @@ margin: 0;
 .post-media, .post-title, .post-meta {
 	display: block;
 }
-.post-title h2.title, .post-title h2.title a {
+.post-title h2.title, .post-title h2.title a, .bloc-newsletter h2{
 	font: 300 20px/30px 'Open Sans',Helvetica,Arial,sans-serif;
 	text-transform: uppercase;
 	margin: 0 0 20px 0;
+}
+
+.bloc-newsletter h2{
+	color: #dd0330;
+	margin: 5px 0 20px 0;
+}
+
+.bloc-newsletter{
+	margin: 0 0 30px;
+	overflow: hidden;
+	padding: 5px 15px 20px 0;
+}
+
+.bloc-newsletter .row div:nth-child(2){
+	padding-top: 10px;
 }
 
 .post-title h2.title strong, .post-title h2.title a strong{

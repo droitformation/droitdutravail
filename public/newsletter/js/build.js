@@ -1,27 +1,33 @@
+
+var url  = location.protocol + "//" + location.host+"/";
+
 var App = angular.module('newsletter', ["angular-redactor","flow","ngSanitize","dndLists"] , function($interpolateProvider)
 {
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+});
 
-}).config(function(redactorOptions) {
+App.constant('__env', window.__env);
+
+App.config(function(redactorOptions,__env) {
         /* Redactor wysiwyg editor configuration */
         redactorOptions.minHeight        = 120;
         redactorOptions.maxHeight        = 240;
         redactorOptions.formattingTags   = ['p', 'h2', 'h3','h4'];
-        redactorOptions.fileUpload       = 'admin/uploadRedactor?_token=' + $('meta[name="_token"]').attr('content');
-        redactorOptions.imageUpload      = 'admin/uploadRedactor?_token=' + $('meta[name="_token"]').attr('content');
-        redactorOptions.imageManagerJson = 'admin/imageJson';
-        redactorOptions.fileManagerJson  = 'admin/fileJson';
-        redactorOptions.plugins          = ['imagemanager','filemanager'];
+        redactorOptions.fileUpload       = __env.adminUrl + 'uploadRedactor?_token=' + $('meta[name="_token"]').attr('content');
+        redactorOptions.imageUpload      = __env.adminUrl + 'uploadRedactor?_token=' + $('meta[name="_token"]').attr('content');
+        redactorOptions.imageManagerJson = __env.adminUrl + 'imageJson';
+        redactorOptions.fileManagerJson  = __env.adminUrl + 'fileJson';
+        redactorOptions.plugins          = ['imagemanager','filemanager','source','iconic','alignment'];
         redactorOptions.lang             = 'fr';
-        redactorOptions.buttons          = ['html','|','formatting','bold','italic','|','unorderedlist','orderedlist','outdent','indent','|','image','file','link','alignment'];
-
-}).config(['flowFactoryProvider', function (flowFactoryProvider) {
+        redactorOptions.buttons          = ['format','bold','italic','|','lists','|','image','file','link','alignment'];
+    
+}).config(['flowFactoryProvider','__env', function (flowFactoryProvider,__env) {
         /* Flow image upload configuration */
         flowFactoryProvider.defaults = {
-            target: 'admin/uploadJS',
-            testChunks:false,
+            target    :  __env.adminUrl + 'uploadJS',
+            testChunks: false,
             singleFile: true,
-            query:{ _token : $("meta[name='_token']").attr('content') } ,
+            query     : { _token : $("meta[name='_token']").attr('content') } ,
             permanentErrors: [404, 500, 501],
             simultaneousUploads: 4
         };
@@ -42,11 +48,8 @@ var App = angular.module('newsletter', ["angular-redactor","flow","ngSanitize","
 
             var months  = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
             var newdate = convertdate.getDate();
-            if (newdate < 10)
-            {
-                newdate = "0" + newdate;
-            }
-            var output = newdate + " " + months[convertdate.getMonth()] + " " + convertdate.getFullYear();
+            newdate     = newdate < 10 ? "0" + newdate : newdate;
+            var output  = newdate + " " + months[convertdate.getMonth()] + " " + convertdate.getFullYear();
             return output;
         },
         convertArret: function(data, models){
@@ -76,32 +79,33 @@ var App = angular.module('newsletter', ["angular-redactor","flow","ngSanitize","
     };
 });
 
+App.filter('to_trusted', ['$sce', function($sce){
+    return function(text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
 /**
  * Retrive all arrets blocs for bloc arret
  */
-App.factory('Arrets', ['$http', '$q', function($http, $q) {
+App.factory('Arrets', ['$http', '$q','__env', function($http, $q,__env) {
     return {
-        query: function() {
+        query: function(site_id) {
             var deferred = $q.defer();
-            $http.get('/admin/ajax/arrets', { cache: true }).success(function(data) {
+            $http.get( __env.ajaxUrl + 'arrets/' + site_id, { cache: true }).success(function(data) {
                 deferred.resolve(data);
-            }).error(function(data) {
-                deferred.reject(data);
-            });
+            }).error(function(data) {deferred.reject(data);});
             return deferred.promise;
         },
         simple: function(id) {
             var deferred = $q.defer();
-            $http.get('/admin/ajax/arrets/'+ id).success(function(data) {
+            $http.get( __env.ajaxUrl + 'arret/'+ id).success(function(data) {
                 deferred.resolve(data);
-            }).error(function(data) {
-                deferred.reject(data);
-            });
+            }).error(function(data) {deferred.reject(data);});
             return deferred.promise;
         }
     };
 }]);
-
 
 /**
  * Form controller, controls the form for creating new content blocs
@@ -120,11 +124,10 @@ App.controller("CreateController",['$scope','$http','myService', function($scope
 
 }]);
 
-
 /**
  * Form controller, controls the form for creating new content blocs
  */
-App.controller("EditController",['$scope','$http','myService', function($scope,$http,myService){
+App.controller("EditController",['$scope','$http','myService','__env', function($scope,$http,myService,__env){
 
     $scope.$on('flow::fileError', function (event, $flow, flowFile) {
         event.preventDefault();//prevent file from uploading
@@ -156,21 +159,16 @@ App.controller("EditController",['$scope','$http','myService', function($scope,$
 
         if(idItem)
         {
-            console.log(idItem);
-
             $( "#sortGroupe_" + idItem ).sortable( "disable" );
             $( ".sortGroupe .groupe_rang").css({ "border":"none"});
         }
 
         $('.finishEdit').hide();
         $('.editContent').show();
-       // $( "#sortable" ).sortable( "enable" );
+        //$( "#sortable" ).sortable( "enable" );
     }
 
     this.editContent = function(idItem){
-
-        var w = $( document ).width();
-        w = w - 890;
 
         myService.setBloc(0);
 
@@ -179,7 +177,7 @@ App.controller("EditController",['$scope','$http','myService', function($scope,$
         $('.edit_content_form').hide();
 
         var content = $('#bloc_rang_'+idItem);
-        content.find('.edit_content_form').css("width",w).show();
+        content.find('.edit_content_form').css("width",600).show();
 
         //$( "#sortable" ).sortable( "disable" );
         content.find('.finishEdit').show();
@@ -188,19 +186,20 @@ App.controller("EditController",['$scope','$http','myService', function($scope,$
 
         $( "#sortGroupe_" + groupe_id ).sortable({
             axis: 'y',
+            handle: '.handleBlocs',
             update: function (event, ui) {
                 var data = $(this).sortable('serialize') +"&groupe_id="+ groupe_id + "&_token=" + $("meta[name='_token']").attr('content');
                 // POST to server using $.post or $.ajax
                 $.ajax({
                     data: data,
                     type: 'POST',
-                    url: url+ 'admin/sortingGroup'
+                    url: url + 'build/sortingGroup'
                 });
             }
         });
 
         $( "#sortGroupe_" + groupe_id ).sortable( "enable" );
-        $( "#sortGroupe_" + groupe_id).find('.groupe_rang').css('border','1px solid #bfe4ad');
+        $( "#sortGroupe_" + groupe_id).find('.groupe_rang').css('border','1px solid #ddd');
 
     };
 
@@ -209,8 +208,8 @@ App.controller("EditController",['$scope','$http','myService', function($scope,$
 /**
  * Select arret controller, select an arret and display's it
  */
-App.controller('SelectController', ['$scope','$http','Arrets','myService',function($scope,$http,Arrets,myService){
-
+App.controller('SelectController', ['$scope','$http','Arrets','myService','__env',function($scope,$http,Arrets,myService,__env){
+    
     /* assign empty values for arrets */
     this.arrets = [];
     this.arret  = false;
@@ -219,10 +218,13 @@ App.controller('SelectController', ['$scope','$http','Arrets','myService',functi
 
     /* function for refreshing the asynchronus retrival of blocs */
     this.refresh = function() {
-        Arrets.query()
-            .then(function (data) {
-                self.arrets = data;
-            });
+
+        var site_id = $('#main').data('site');
+        site_id = !site_id ? null : site_id;
+
+        Arrets.query(site_id).then(function (data) {
+            self.arrets = data;
+        });
     }
 
     if(self.arrets.length == 0){
@@ -249,9 +251,7 @@ App.controller('SelectController', ['$scope','$http','Arrets','myService',functi
         Arrets.simple(id)
             .then(function (data) {
                 self.arret = data;
-                self.categories = data.arrets_categories;
-
-                //get substring
+                self.categories = data.categories;
                 self.date = myService.convertDateArret(self.arret.pub_date)
             });
     };
@@ -259,7 +259,7 @@ App.controller('SelectController', ['$scope','$http','Arrets','myService',functi
 }]);
 
 
-App.controller("MultiSelectionController",['$scope',"Arrets","myService", function($scope,Arrets,myService){
+App.controller("MultiSelectionController",['$scope',"Arrets","myService",'__env', function($scope,Arrets,myService,__env){
 
     /* capture this (the controller scope ) as self */
     var self = this;
@@ -275,14 +275,13 @@ App.controller("MultiSelectionController",['$scope',"Arrets","myService", functi
     /* function for refreshing the asynchronus retrival of blocs */
     this.refresh = function() {
 
-        Arrets.query()
-            .then(function (data) {
+        var site_id = $('#main').data('site');
+        site_id = !site_id ? null : site_id;
 
-                self.items  = data;
-                //console.log(self.items);
-                self.models = myService.convertArret(self.items, self.models);
-
-            });
+        Arrets.query(site_id).then(function (data) {
+            self.items  = data;
+            self.models = myService.convertArret(self.items, self.models);
+        });
     }
 
     if(self.items.length == 0){
@@ -290,18 +289,15 @@ App.controller("MultiSelectionController",['$scope',"Arrets","myService", functi
     }
 
     this.dropped = function(item){
-
         angular.forEach(self.models.lists.B, function(value, key){
             value.isSelected = true;
         });
         angular.forEach(self.models.lists.A, function(value, key){
             value.isSelected = false;
         });
-
     };
 
 }]);
-
 
 App.directive('bindContent', function() {
     return {
