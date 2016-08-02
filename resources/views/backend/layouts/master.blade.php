@@ -12,12 +12,6 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/styles.css?=121');?>">
-
-    @if(isset($isNewsletter))
-        @include('newsletter::Style.main', ['campagne' => isset($campagne) ? : null])
-        @include('newsletter::Style.redactor')
-    @endif
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/dt-1.10.9/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/jquery-ui.min.css');?>">
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/chosen.css');?>">
@@ -26,6 +20,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/admin.css');?>">
     <link rel="stylesheet" type="text/css" href="<?php echo asset('backend/css/types.css');?>">
     <link rel='stylesheet' type='text/css' href="<?php echo asset('backend/plugins/form-nestable/jquery.nestable.css');?>" />
+
+    @if(isset($isNewsletter))
+        @include('newsletter::Style.main', ['campagne' => isset($campagne) ? : null])
+        @include('newsletter::Style.redactor')
+    @endif
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
