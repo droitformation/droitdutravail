@@ -29,10 +29,10 @@ Route::group(['middlewareGroups' => ['web']], function () {
     Route::resource('newsletter', 'Frontend\NewsletterController');
     Route::get('newsletter/campagne/{id}', 'Frontend\NewsletterController@campagne');
 
-    Route::post('unsubscribe', 'Backend\Newsletter\InscriptionController@unsubscribe');
-    Route::post('subscribe', 'Backend\Newsletter\InscriptionController@subscribe');
-    Route::post('resend', 'Backend\Newsletter\InscriptionController@resend');
-    Route::get('activation/{token}', 'Backend\Newsletter\InscriptionController@activation');
+    //Route::post('unsubscribe', 'Backend\Newsletter\InscriptionController@unsubscribe');
+    //Route::post('subscribe', 'Backend\Newsletter\InscriptionController@subscribe');
+    //Route::get('activation/{token}', 'Backend\Newsletter\InscriptionController@activation');
+    //Route::post('resend', 'Backend\Newsletter\InscriptionController@resend');
     Route::get('campagne/{id}', 'Frontend\CampagneController@show');
 
     /*
