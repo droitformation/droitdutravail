@@ -36,7 +36,7 @@ class AnalyseEloquent implements AnalyseInterface{
 
 		$analyse = $this->analyse->create(array(
 			'user_id'    => $data['user_id'],
-            'authors'    => $data['authors'],
+            'author'     => $data['author'],
             'pub_date'   => $data['pub_date'],
             'abstract'   => $data['abstract'],
             'file'       => $data['file'],

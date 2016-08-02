@@ -78,7 +78,7 @@ Route::group(['middlewareGroups' => ['web']], function () {
         Route::get('ajax/arret/{id}', 'Backend\ArretController@simple'); // build.js
         Route::get('ajax/arrets/{id?}', 'Backend\ArretController@arrets'); // build.js
         Route::get('ajax/categories/{id?}', 'Backend\CategorieController@categories'); // utils.js
-
+        Route::get('ajax/analyses/{id}', 'Backend\AnalyseController@simple');
    /*     
         Route::resource('newsletter', 'Backend\Newsletter\NewsletterController');
 
