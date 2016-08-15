@@ -23,7 +23,7 @@
 
                     @if($desired_parent->image)
                         <a target="_blank" href="{{ url('jurisprudence') }}#{{ $bloc->reference }}">
-                            <img width="130" border="0" alt="{{ $desired_parent->title }}" src="{{ asset('newsletter/pictos/'.$desired_parent->image) }}">
+                            <img width="130" border="0" alt="{{ $desired_parent->title }}" src="{{ asset('files/pictos/'.$desired_parent->image) }}">
                         </a>
                     @else
                         <h3 style=" font-family: Arial,Helvetica,sans-serif;font-style: normal; line-height: 24px; color: #006eb4;font-size: 14px; margin: 10px 0;">{{ $desired_parent->title }}</h3>
@@ -32,7 +32,7 @@
 
                 @foreach($categories as $categorie)
                     <a target="_blank" href="{{ url('jurisprudence') }}#{{ $bloc->reference }}">
-                        <img width="130" border="0" alt="{{ $categorie->title }}" src="{{ asset('newsletter/pictos/'.$categorie->image) }}">
+                        <img width="130" border="0" alt="{{ $categorie->title }}" src="{{ asset('files/pictos/'.$categorie->image) }}">
                     </a>
                 @endforeach
             @endforeach
