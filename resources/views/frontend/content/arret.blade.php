@@ -2,7 +2,7 @@
     <div class="col-md-9">
         <div class="post">
             <div class="post-title">
-                <?php setlocale(LC_ALL, 'fr_FR.UTF-8');  ?>
+                <?php setlocale(LC_ALL, 'fr_FR.UTF-8');?>
                 <h2 class="title">{{ $bloc->reference }} du {{ $bloc->pub_date->formatLocalized('%d %B %Y') }}</h2>
                 <p>{!! $bloc->abstract !!}</p>
             </div><!--END POST-TITLE-->
@@ -10,6 +10,12 @@
                 {!! $bloc->pub_text !!}
                 @if(isset($bloc->file))
                     <p><a target="_blank" href="{{ asset('files/arrets/'.$bloc->file) }}">Télécharger en pdf</a></p>
+                @endif
+
+                @if($bloc->analyses->isEmpty())
+                    @foreach($bloc->analyses as $analyse)
+                        <p><a target="_blank" href="{{ asset('files/analyses/'.$analyse->file) }}">Télécharger l'analyse en pdf</a></p>
+                    @endforeach
                 @endif
             </div>
         </div><!--END POST-->

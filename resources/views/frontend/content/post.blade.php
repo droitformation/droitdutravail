@@ -17,6 +17,12 @@
                             </a>
                         </p>
                     @endif
+
+                    @if(!$arret->analyses->isEmpty())
+                        @foreach($arret->analyses as $analyse)
+                            <p><a target="_blank" href="{{ asset('files/analyses/'.$analyse->file) }}">Télécharger l'analyse en pdf &nbsp;&nbsp;<i class="fa fa-file-pdf-o"></i></a></p>
+                        @endforeach
+                    @endif
                 </div>
             </div><!--END POST-->
         </div>
