@@ -65,37 +65,13 @@ Route::group(['middlewareGroups' => ['web']], function () {
        | Backend subscriptions, newsletters and campagnes Routes
        |--------------------------------------------------------------------------
        */
-        /*
-        Route::post('sorting', 'Backend\Newsletter\CampagneController@sorting');
-        Route::post('sortingGroup', 'Backend\Newsletter\CampagneController@sortingGroup');
 
-        Route::get('ajax/arrets/{id}',   'Backend\ArretController@simple');
-        Route::get('ajax/arrets',        'Backend\ArretController@arrets');
-        Route::get('ajax/analyses/{id}', 'Backend\AnalyseController@simple');
-        Route::get('ajax/categories',    'Backend\CategorieController@categories');
-        Route::post('ajax/categorie/arrets', 'Backend\CategorieController@arrets');*/
 
         Route::get('ajax/arret/{id}', 'Backend\ArretController@simple'); // build.js
         Route::get('ajax/arrets/{id?}', 'Backend\ArretController@arrets'); // build.js
         Route::get('ajax/categories/{id?}', 'Backend\CategorieController@categories'); // utils.js
         Route::get('ajax/analyses/{id}', 'Backend\AnalyseController@simple');
    /*     
-        Route::resource('newsletter', 'Backend\Newsletter\NewsletterController');
-
-        Route::post('clipboard/copy', 'Backend\Newsletter\ClipboardController@copy');
-        Route::post('clipboard/paste','Backend\Newsletter\ClipboardController@paste');
-        Route::get('clipboard/{id}',  'Backend\Newsletter\ClipboardController@show');
-
-        Route::post('campagne/send', 'Backend\Newsletter\CampagneController@send');
-        Route::post('campagne/test', 'Backend\Newsletter\CampagneController@test');
-        Route::post('campagne/sorting', 'Backend\Newsletter\CampagneController@sorting');
-        Route::post('campagne/process', 'Backend\Newsletter\CampagneController@process');
-        Route::post('campagne/editContent', 'Backend\Newsletter\CampagneController@editContent');
-        Route::post('campagne/remove', 'Backend\Newsletter\CampagneController@remove');
-        Route::get('campagne/create/{newsletter}', 'Backend\Newsletter\CampagneController@create');
-        Route::get('campagne/simple/{id}', 'Backend\Newsletter\CampagneController@simple');
-        Route::resource('campagne', 'Backend\Newsletter\CampagneController');
-
         Route::delete('subscriber', 'Backend\Newsletter\SubscriberController@destroy');
         Route::resource('subscriber', 'Backend\Newsletter\SubscriberController');
         Route::get('subscribers', ['uses' => 'Backend\Newsletter\SubscriberController@subscribers']);
