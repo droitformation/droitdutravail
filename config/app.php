@@ -147,7 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Vinkla\Alert\AlertServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -214,7 +214,8 @@ return [
         'Html'  => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Campagne' => designpond\newsletter\Facade\Campagne::class
+        'Campagne' => designpond\newsletter\Facade\Campagne::class,
+        'Alert'      => Vinkla\Alert\Facades\Alert::class
     ],
 
 ];
