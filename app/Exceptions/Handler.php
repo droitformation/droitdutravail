@@ -45,6 +45,76 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof \designpond\newsletter\Exceptions\BadFormatException){
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\CampagneCreationException){
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\CampagneSendException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\CampagneUpdateException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\ContentCreationException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\DeleteUserException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\FileUploadException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\ListNotSetException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\MultiSiteException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\SubscribeUserException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\TestSendException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
+        if ($e instanceof \designpond\newsletter\Exceptions\UserNotExistException)
+        {
+            alert()->warning($e->getMessage());
+            return redirect()->back();
+        }
+
         return parent::render($request, $e);
     }
 }
