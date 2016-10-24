@@ -85,6 +85,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="message" class="col-sm-3 control-label">Résumé (sur page des auteurs)</label>
+                    <div class="col-sm-7">
+                        {!! Form::text('remarque', $analyse->remarque , array('class' => 'form-control') ) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="message" class="col-sm-3 control-label">Résumé</label>
                     <div class="col-sm-7">
                         {!! Form::textarea('abstract', $analyse->abstract , array('class' => 'form-control', 'cols' => '50' , 'rows' => '4' )) !!}

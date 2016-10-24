@@ -39,10 +39,11 @@ class AnalyseEloquent implements AnalyseInterface{
             'author'     => $data['author'],
             'pub_date'   => $data['pub_date'],
             'abstract'   => $data['abstract'],
+            'remarque'   => (isset($data['remarque']) ? $data['remarque'] : ''),
             'file'       => $data['file'],
             //'categories' => (isset($data['categories']) ? count($data['categories']) : 0),
             //'arrets'     => (isset($data['arrets']) ? count($data['arrets']) : 0),
-            'title'      => (isset($data['title']) ? count($data['title']) : null),
+            'title'      => (isset($data['title']) ? $data['title'] : null),
 			'created_at' => date('Y-m-d G:i:s'),
 			'updated_at' => date('Y-m-d G:i:s')
 		));

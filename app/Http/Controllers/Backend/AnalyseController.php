@@ -85,7 +85,6 @@ class AnalyseController extends Controller {
      */
     public function store(Request $request)
     {
-
         $data  = $request->except('file');
         $_file = $request->file('file',null);
 
