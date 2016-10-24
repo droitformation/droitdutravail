@@ -20,8 +20,9 @@
                         <thead>
                         <tr>
                             <th class="col-sm-1">Action</th>
-                            <th class="col-sm-3">Auteur</th>
-                            <th class="col-sm-3">Date de publication</th>
+                            <th class="col-sm-2">Auteur</th>
+                            <th class="col-sm-2">Arrêts</th>
+                            <th class="col-sm-2">Date de publication</th>
                             <th class="col-sm-4">Résumé</th>
                             <th class="col-sm-1"></th>
                         </tr>
@@ -33,6 +34,13 @@
                             <tr>
                                 <td><a class="btn btn-sky btn-sm" href="{{ url('admin/analyse/'.$analyse->id) }}">éditer</a></td>
                                 <td><strong>{{ $analyse->authors->implode('name', ', ') }}</strong></td>
+                                <td>
+                                    @if(isset($analyse->arrets) && !$analyse->arrets->isEmpty())
+                                        @foreach($analyse->arrets as $arret)
+                                            <p>{{ $arret->reference }}</p>
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td>{{ $analyse->pub_date->formatLocalized('%d %B %Y') }}</td>
                                 <td>{{ $analyse->abstract }}</td>
                                 <td>

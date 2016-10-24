@@ -36,7 +36,7 @@
                             @else
                                 <h4 class="title <?php echo ( $contenu['count'] > 1 ? 'home-bloc' : ''); ?>">{{ $bloc->titre }}</h4>
                             @endif
-                            <p>{!! $bloc->contenu !!}</p>
+                            <p class="text-justify">{!! $bloc->contenu !!}</p>
                         </div>
                     @endforeach
                 </div><!-- end row -->
