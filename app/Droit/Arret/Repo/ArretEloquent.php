@@ -114,6 +114,8 @@ class ArretEloquent implements ArretInterface{
             $arret->file = $data['file'];
         }
 
+        $arret->dumois = isset($data['dumois']) ? 1 : null;
+
         // Insert related categories
         if(isset($data['categories']))
         {
