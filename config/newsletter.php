@@ -57,6 +57,8 @@ return [
     'link' => [
         'arret'   => PHP_SAPI === 'cli' ? false : url('jurisprudence'),
         'analyse' => PHP_SAPI === 'cli' ? false : url('jurisprudence')
-    ]
+    ],
+
+    'pdf' => false
 
 ];
