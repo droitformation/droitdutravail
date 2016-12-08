@@ -27,8 +27,6 @@
 #StyleNewsletter .resetTable,
 #StyleNewsletterCreate .resetTable{
     border-collapse:collapse;
-    mso-table-lspace:0pt;
-    mso-table-rspace:0pt;
     margin: 0;
     padding: 0;
 }
