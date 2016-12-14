@@ -217,6 +217,7 @@ return [
         'Campagne' => designpond\newsletter\Facade\Campagne::class,
         'Alert'      => Vinkla\Alert\Facades\Alert::class,
         'PDF'    => Barryvdh\DomPDF\Facade::class,
+        
     ],
 
 ];
