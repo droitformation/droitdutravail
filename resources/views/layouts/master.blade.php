@@ -67,7 +67,7 @@
 
                 <!-- START BLOG -->
                 <div id="content-wrapper">
-
+                @include('alert::alert')
                     <!-- Contenu -->
                     @yield('content')
                     <!-- Fin contenu -->
