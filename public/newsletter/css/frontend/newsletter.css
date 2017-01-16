@@ -197,3 +197,17 @@
 .text-right {
     text-align: right;
 }
+
+#StyleNewsletter .resetTable.alert-dumois{
+    border-top: 1px solid #ffbab9;
+    border-left:1px solid #ffbab9;
+    border-right:1px solid #ffbab9;
+}
+
+#StyleNewsletter .resetTable.alert-dumois .blocBorder{
+    border-bottom: 1px solid #ffbab9;
+}
+
+.link_pdf a{
+    color: #5A101F !important;
+}
