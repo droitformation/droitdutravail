@@ -214,6 +214,10 @@
     border-bottom: 1px solid #ffbab9;
 }
 
+#sortable .alert-dumois .blocBorder{
+    border-bottom: 1px solid #ffbab9;
+}
+
 .link_pdf a{
     color: #5A101F !important;
 }
