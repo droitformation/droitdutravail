@@ -9,15 +9,16 @@ class ColloqueWorker{
     public function __construct()
     {
         $this->custom  = new \App\Droit\Helper\Helper();
-        $this->client  = new \GuzzleHttp\Client();
+        $this->client  = new \GuzzleHttp\Client(['curl' => [CURLOPT_SSL_VERIFYPEER => false]]);
 
         $environment    = \App::environment();
-        $this->base_url = ($environment == 'local' ? 'http://lux.local' : 'http://www.publications-droit.ch/fileadmin/lux');
+        $this->base_url = ($environment == 'local' ? 'https://shop.local' : 'https://www.publications-droit.ch/event');
     }
 
     public function getColloques(){
 
-        $response   = $this->client->get( $this->base_url.'/event', ['query' => ['centres' => ['cemaj','cert'] ]]);
+        $response   = $this->client->get( $this->base_url.'/event', ['query' => ['centres' => ['3','2'] ]]);
+        
         $data       = json_decode($response->getBody(), true);
         $data       = $this->organise($data['data']);
 
@@ -28,7 +29,7 @@ class ColloqueWorker{
 
     public function getArchives(){
 
-        $response   = $this->client->get( $this->base_url.'/event', ['query' => ['archive' => 'archive', 'centres' => ['cemaj','cert'] ]]);
+        $response   = $this->client->get( $this->base_url.'/event', ['query' => ['archive' => 'archive', 'centres' => ['2','3'] ]]);
         $data       = json_decode($response->getBody(), true);
         $data       = $this->organiseYear($data['data']);
         $collection = new \Illuminate\Support\Collection($data);
@@ -42,11 +43,14 @@ class ColloqueWorker{
         {
             foreach($data as $colloque)
             {
-                $centre = (count($colloque['organisateur']) > 1 ? 'both' : $colloque['organisateur'][0]);
+                $organisateurs = $colloque['organisateur'];
+                $organisateurs = array_values($organisateurs);
+
+                $centre = (count($organisateurs) > 1 ? 'both' : $organisateurs[0]);
                 $organise[$centre][] = $colloque;
             }
 
-            $sorting  = array('cert','cemaj');
+            $sorting  = ['cert','cemaj'];
             $organise = $this->custom->sortArrayByArray($organise,$sorting);
 
             return $organise;
@@ -61,8 +65,8 @@ class ColloqueWorker{
         {
             foreach($data as $colloque)
             {
-                $date = $colloque['event']['dateDebut'];
-                $year = \Carbon\Carbon::createFromFormat('Y-m-d', $date);
+                $date = $colloque['event']['start_at'];
+                $year = \Carbon\Carbon::parse($date);
                 $years[$year->year][] = $colloque;
             }
 

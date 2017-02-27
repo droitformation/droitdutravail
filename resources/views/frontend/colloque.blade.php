@@ -33,35 +33,37 @@
                                 <div class="post-content">
 
                                     <?php
-                                        $date  = \Carbon\Carbon::createFromFormat('Y-m-d', $colloque['event']['dateDebut']);
-                                        $delai = \Carbon\Carbon::createFromFormat('Y-m-d', $colloque['event']['DelaiInscription']);
+                                        $date  = \Carbon\Carbon::parse($colloque['event']['start_at']);
+                                        $delai = \Carbon\Carbon::parse($colloque['event']['registration_at']);
                                     ?>
 
                                     <div class="post-date">
                                         <ul>
                                             <li class="date">
-                                                <span class="day">{{ $date->day }}</span><span class="month">{{ $date->formatLocalized('%B') }}</span> <span class="year">{{ $date->year }}</span>
+                                                <span class="day">{{ $date->day }}</span><span class="month">{{ $date->formatLocalized('%B') }}</span>
+                                                <span class="year">{{ $date->year }}</span>
                                             </li>
                                         </ul>
                                     </div><!--END POST-DATE-->
 
                                     <div class="post-title">
                                         <h2 class="title">
-                                            <a target="_blank" href="http://www.publications-droit.ch/index.php?id=275#/item/59">{{ $colloque['event']['titre'] }}<br/>
-                                                <strong>{{ $colloque['event']['soustitre'] }}</strong></a>
+                                            <a target="_blank" href="{{ $colloque['url'] }}">{{ $colloque['event']['titre'] }}<br/>
+                                                <strong>{{ $colloque['event']['soustitre'] }}</strong>
+                                            </a>
                                         </h2>
                                     </div><!--END POST-TITLE-->
 
                                     <div class="post-entry">
-                                        <p>{{ $colloque['event']['remarques'] }}</p>
-                                        @if(isset($colloque['programme']['url']))
-                                            <a target="_blank" href="{{ $colloque['programme']['url'].$colloque['programme']['filename'] }}">
+                                        <p>{!! $colloque['event']['remarques'] !!}</p>
+                                        @if(isset($colloque['programme']))
+                                            <a target="_blank" href="{{ $colloque['programme'] }}">
                                                 &nbsp;<i class="fa fa-file-o"></i> &nbsp;&nbsp;Le programme
                                             </a>
                                         @endif
                                         <dl class="dl-horizontal">
                                             <dt>Lieu:</dt>
-                                            <dd>{{ $colloque['event']['endroit'] }}</dd>
+                                            <dd>{{ $colloque['location'] }}</dd>
                                             <dt>Date:</dt>
                                             <dd>{{ $date->format('d/m/y') }}</dd>
                                             <dt>Délai d'inscription:</dt>
@@ -70,11 +72,11 @@
                                             <dt>Prix d'inscription:</dt>
                                             @if(!empty($colloque['prix']))
                                                 @foreach($colloque['prix'] as $prix)
-                                                    <dd>{{ $prix['remarquePrix'] }} <strong>CHF {{ $prix['Prix'] }}</strong></dd>
+                                                    <dd>{{ $prix['description'] }} <strong>CHF {{ $prix['price']/100 }}</strong></dd>
                                                 @endforeach
                                             @endif
                                         </dl>
-                                        <p><a target="_blank" href="http://www.publications-droit.ch/index.php?id=275#/item/{{ $colloque['event']['id_Colloque'] }}" class="button small grey">Inscription</a></p>
+                                        <p><a target="_blank" href="{{  $colloque['url'] }}" class="button small grey">Inscription</a></p>
 
                                     </div><!--END POST-ENTRY-->
 
@@ -108,9 +110,9 @@
 
                                     @foreach($list as $colloque)
                                         <p>
-                                            <?php $date  = \Carbon\Carbon::createFromFormat('Y-m-d', $colloque['event']['dateDebut']); ?>
+                                            <?php $date  = \Carbon\Carbon::parse($colloque['event']['start_at']); ?>
 
-                                            <a target="_blank" href="http://www.publications-droit.ch/index.php?id=275#/item/{{ $colloque['event']['id_Colloque'] }}">
+                                            <a target="_blank" href="{{ $colloque['url'] }}">
                                                 <i class="glyphicon glyphicon-inbox"></i> &nbsp;{{ $colloque['event']['titre'] }}
                                             </a>
                                             | <small>{{ $date->formatLocalized('%d %B %Y') }}</small>
