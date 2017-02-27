@@ -23,7 +23,9 @@
                 @foreach($colloques as $name => $centre)
 
                     <h4 class="title-section">
-                        <a target="_blank" href="http://www2.unine.ch/cert"><img src="<?php echo asset('images/logos/'.$name.'.jpg');?>" alt="{{ $name }}" /></a>
+                        <a target="_blank" href="http://www2.unine.ch/cert">
+                            <img src="<?php echo asset('images/logos/'.$name.'.jpg');?>" alt="{{ $name }}" />
+                        </a>
                     </h4>
 
                     @foreach($centre as $colloque)
@@ -106,7 +108,7 @@
                             @if($colloques)
                                 @foreach($colloques as $organisateur => $list)
 
-                                    <h4>{{ $organisateur }}</h4>
+                                    <h4>{{ $organisateur == 'both' ? 'CERT et CEMAJ' : strtoupper($organisateur) }}</h4>
 
                                     @foreach($list as $colloque)
                                         <p>
