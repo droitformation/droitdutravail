@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="panel panel-default">
-        <div class="panel-heading">Reset Password</div>
+        <div class="panel-heading">Changer de mot de passe</div>
         <div class="panel-body">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">Send Password Reset Link</button>
+                        <button type="submit" class="btn btn-primary">Envoyer le lien</button>
                     </div>
                 </div>
             </form>
