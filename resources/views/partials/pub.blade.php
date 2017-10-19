@@ -11,7 +11,8 @@
                         <a class="media-left pull-left" style="margin-right: 10px; margin-bottom: 5px;" target="_blank" href="{{ $ad->url }}">
                             <img style="max-width: 130px;" src="{{ url('files').'/'.$ad->image }}" alt="{{{ $ad->titre or 'image' }}}" />
                         </a>
-                        <h4 class="media-heading pull-left">{{ $ad->titre }}</h4>
+                        <h4 class="media-heading">{{ $ad->titre }}</h4>
+                        
                         <div style="text-align: justify; margin-bottom: 5px;">{!! $ad->contenu or '' !!}</div>
                         <a class="button small grey" target="_blank" href="{{ $ad->url }}">En savoir plus</a>
                     </div>
