@@ -96,6 +96,9 @@ class InscriptionController extends Controller
         // find the abo
         $abonne = $this->subscription->findByEmail( $request->email );
 
+        if(!$abonne){
+            return redirect('/')->with(['status'  => 'danger', 'message' => '<strong>Aucun abbonée avec cet email</strong>']);
+        }
         // Sync the abos to newsletter we have
         $abonne->subscriptions()->detach($request->newsletter_id);
 
