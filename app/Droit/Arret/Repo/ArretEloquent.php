@@ -14,7 +14,7 @@ class ArretEloquent implements ArretInterface{
 
     public function getAll($nbr = null)
     {
-        $arrets = $this->arret->with(['categories','analyses'])->orderBy('reference', 'ASC');
+        $arrets = $this->arret->with(['categories','analyses'])->orderBy('pub_date', 'DESC');
 
         if($nbr){
             $arrets->take(5);
@@ -31,7 +31,7 @@ class ArretEloquent implements ArretInterface{
             $arrets->whereNotIn('id', $exclude);
         }
 
-        return $arrets->orderBy('reference', 'ASC')->get();
+        return $arrets->orderBy('pub_date', 'DESC')->get();
 
     }
 
@@ -42,7 +42,7 @@ class ArretEloquent implements ArretInterface{
 
     public function getLatest($exclude = [])
     {
-        return $this->arret->whereNotIn('id', $exclude)->has('analyses')->with(['analyses'])->orderBy('id', 'ASC')->get()->take(5);
+        return $this->arret->whereNotIn('id', $exclude)->has('analyses')->with(['analyses'])->orderBy('pub_date', 'DESC')->get()->take(5);
     }
 
 	public function find($id){
@@ -57,7 +57,7 @@ class ArretEloquent implements ArretInterface{
 
     public function annees()
     {
-        $arrets = $this->arret->all();
+        $arrets = $this->arret->orderBy('pub_date', 'DESC')->get();
 
         return $arrets->groupBy(function ($archive, $key) {
             return $archive->pub_date->year;
