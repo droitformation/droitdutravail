@@ -1295,3 +1295,7 @@ p.align-justify{
 #filteringApp{
     position: relative;
 }
+
+.form input.honey{
+	display:none;
+}
