@@ -164,6 +164,8 @@ return [
         App\Providers\ContentServiceProvider::class,
         designpond\newsletter\newsletterServiceProvider::class,
         //App\Providers\NewsletterServiceProvider::class,
+        Msurguy\Honeypot\HoneypotServiceProvider::class,
+
 
     ],
 
@@ -217,7 +219,7 @@ return [
         'Campagne' => designpond\newsletter\Facade\Campagne::class,
         'Alert'      => Vinkla\Alert\Facades\Alert::class,
         'PDF'    => Barryvdh\DomPDF\Facade::class,
-        
+        'Honeypot' => Msurguy\Honeypot\HoneypotFacade::class
     ],
 
 ];

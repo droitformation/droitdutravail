@@ -10,7 +10,7 @@
              <button class="btn btn-default grey" type="submit">Envoyer</button>
           </span>
         </div><!-- /input-group -->
-        <input type="text" name="honey" value="" class="honey">
+        {!! Honeypot::generate('my_name', 'my_time') !!}
     </form>
 </div><!--END WIDGET-->
 
