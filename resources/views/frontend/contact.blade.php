@@ -49,6 +49,7 @@
                         <p class="form-submit">
                             <input id="submitted" value="Envoyer" class="submit button medium grey" type="submit" />
                         </p>
+                        {!! Honeypot::generate('my_name', 'my_time') !!}
                     </form><!--END CONTACT FORM-->
                 </div><!--END ONE-HALF LAST-->
             </div><!--END row-->
