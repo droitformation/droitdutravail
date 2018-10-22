@@ -22,7 +22,7 @@
                 @foreach($archives as $year => $campagnes)
                     <dl class="dl-horizontal">
                     <dt><strong><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Année {{ $year }}</strong></dt>
-                        @foreach($campagnes as $campagne)
+                        @foreach($campagnes->sortByDesc('send_at') as $campagne)
                             <dd>
                                 <h5><a href="{{ url('newsletter/campagne/'.$campagne->id )}}">{{ $campagne->sujet }}</a></h5>
                             </dd>
